@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+  <head>
+    <title>Trieu Le</title>
+    <link rel="stylesheet" href="dist/tuicss.min.css"/>
+    <script src="dist/tuicss.min.js"></script>
+    <style>
+      body {
+        height: 100vh;
+        width: 100%;
+      }
+
+      .main {
+        height: 100%;
+      }
+
+      .content {
+        padding: 40px;
+        display: flex;
+        gap: 20px;
+      }
+
+      .experience {
+        flex: 1;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+      }
+
+      .tui-nav {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .experience-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .company {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .company-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .company-details {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 10px;
+      }
+
+      .past-job {
+        .desc {
+          font-style: italic;
+        }
+
+        ul {
+          padding-left: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          li::before {
+            content: "\25A0";
+            margin-right: 8px;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tui-bg-blue-black main">
+      <nav class="tui-nav absolute">
+          <ul>
+              <li class="tui-dropdown">
+                  <span class="red-168-text">I</span>ntroduction
+              </li>
+              <li class="tui-dropdown">
+                  <span class="red-168-text">R</span>esume
+              </li>
+          </ul>
+
+          <span class="tui-datetime" data-format="M/d/y h:m:s a"></span>
+      </nav>
+
+      <div class="content">
+        <div class="left" style="display: flex; flex-direction: column; max-width: fit-content">
+          <div class="tui-window">
+              <fieldset class="tui-fieldset tui-border-double">
+                  <legend>About me</legend>
+                  <img src="assets/pp.png" width="200">
+                  <p>Name....: Trieu Le</span></p>
+                  <p>City....: Calgary, Alberta</span></p>
+                  <p>Position: Software Developer</span></p>
+              </fieldset>
+          </div>
+        </div>
+
+        <div class="tui-window white-168 experience">
+            <fieldset class="tui-fieldset tui-border-double">
+                <legend class="center">Experience</legend>
+                <div class="experience-content">
+                  <div class="past-job black-168-text">
+                    <div class="company">
+                      <img width="50" src="assets/opswat.png">
+                      <div class="company-details">
+                        <span class="yellow-255-text">Senior Software Engineer</span>
+                        <span class="blue-168-text">OPSWAT (Nov 2022 - Jun 2025)</span>
+                      </div>
+                    </div>
+
+                    <p class="desc">
+                      MetaDefender Core
+                      Advanced malware prevention and detection platform designed for integration into secure IT infrastructure via cross-platform APIs.
+                    </p>
+
+                    <p> Key Contributions: <p>
+                    <ul>
+                      <li>Accessibility & Inclusion: Architected and implemented UI components to meet WCAG 2.1 standards, ensuring the security dashboard is accessible to all users.</li>
+                      <li>Quality Engineering: Spearheaded the transition to automated testing by introducing Playwright for End-to-End (E2E) testing, reducing manual QA cycles and increasing deployment confidence.</li>
+                      <li>Performance Optimization: Profiled web vitals to identify bottlenecks, resulting in minimized bundle sizes and significantly faster initial render times for the management console.</li>
+                    </ul>
+                  </div>
+
+                  <div class="tui-divider"></div>
+
+                  <div class="past-job black-168-text">
+                    <div class="company">
+                      <img width="50" src="assets/bosch.png">
+                      <div class="company-details">
+                        <span class="yellow-255-text">Senior Software Engineer</span>
+                        <span class="blue-168-text">Bosch Global Software Technologies Vietnam (Nov 2021 - Aug 2022)</span>
+                      </div>
+                    </div>
+
+                    <p class="desc">
+                      Internal Budget Management Application
+                      Full-stack development of a centralized financial platform for internal resource allocation and real-time budget tracking.
+                    </p>
+                    <ul>
+                      <li>State Management & Scalability: Engineered complex reactive features using RxJS and NgRx to ensure predictable state transitions and high performance across large financial datasets.</li>
+                      <li>Core Library Architecture: Contributed reusable UI components and utility services to the company-wide core library, reducing duplicate code and ensuring design consistency across departments.</li>
+                      <li>Full-Stack Feature Delivery: Developed and maintained end-to-end features using Angular 12 and Java/Spring Boot, prioritizing strict data validation and adherence to enterprise coding standards.</li>
+                      <li>Quality Assurance & Mentorship: Maintained high code quality through rigorous peer code reviews and expanded the automated testing suite using Cypress to ensure 100% reliability for critical budget calculations.</li>
+                    </ul>
+                  </div>
+
+                  <div class="tui-divider"></div>
+
+                  <div class="past-job black-168-text">
+                    <div class="company">
+                      <img width="50" src="assets/nashtech.png">
+                      <div class="company-details">
+                        <span class="yellow-255-text">Software Engineer</span>
+                        <span class="blue-168-text">Nashtech (Jan 2021 - Aug 2021)</span>
+                      </div>
+                    </div>
+
+                    <p class="desc">
+                      Finantix ODC (Financial Solutions Division)
+                      Offshore development for a global FinTech leader, delivering bespoke digital banking and wealth management solutions for international financial institutions.
+                    </p>
+                    <ul>
+                      <li>Data-Driven Visualization: Architected complex financial dashboards and interactive reporting modules using Highcharts and Ag-Grid, enabling users to visualize and manage large-scale investment datasets.</li>
+                      <li>Modular Development: Partnered with Technical Leads to decompose high-level business requirements into scalable Angular 9 modules and reusable TypeScript functions, ensuring strict adherence to enterprise architecture.</li>
+                      <li>Global Collaboration: Orchestrated daily technical syncs and sprint reviews with Project Owners and QA teams across Italy and Singapore, facilitating seamless handovers and resolving cross-timezone integration blockers.</li>
+                      <li>Legacy System Modernization: Balanced the delivery of modern features with the maintenance of legacy codebases, utilizing Jasmine for unit testing to ensure stability and prevent regressions during system updates.</li>
+                      <li>UI/UX Optimization: Leveraged PrimeNG and Bootstrap 4 to build responsive, accessible financial interfaces that meet the professional standards of private banking clients.</li>
+                    </ul>
+                  </div>
+
+                  <div class="tui-divider"></div>
+
+                  <div class="past-job black-168-text">
+                    <div class="company">
+                      <img width="50" src="assets/starbap.png">
+                      <div class="company-details">
+                        <span class="yellow-255-text">Software Engineer</span>
+                        <span class="blue-168-text">Starbap Technology Vietnam (Aug 2020 - Feb 2021)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </fieldset>
+        </div>
+      </div>
+
+      <nav class="tui-statusbar absolute">
+        <ul>
+          <li><a href="#!"><span class="red-168-text">F1</span> Help</a></li>
+          <li><a href="#!"><span class="red-168-text">F2</span> Save</a></li>
+          <li><a href="#!"><span class="red-168-text">F3</span> Open</a></li>
+          <li><a href="#!"><span class="red-168-text">Alt+F9</span> Compile</a></li>
+          <span class="tui-statusbar-divider"></span>
+          <li><a href="#!"><span class="red-168-text">F10</span> Menu</a></li>
+        </ul>
+      </nav>
+    </div>
+  </body>
+</>
