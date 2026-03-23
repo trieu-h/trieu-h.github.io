@@ -1,5 +1,6 @@
 <!DOCTYPE html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trieu Le</title>
     <link rel="stylesheet" href="dist/tuicss.min.css"/>
     <script src="dist/tuicss.min.js"></script>
@@ -11,6 +12,7 @@
 
       .main {
         height: 100%;
+        min-height: 100vh;
       }
 
       .content {
@@ -104,6 +106,52 @@
         transform: translate(-50%, -50%);
         width: fit-content;
       }
+
+      .left img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .company-details span {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+
+      @media screen and (max-width: 768px) {
+        .content {
+          flex-direction: column;
+          padding: 40px 30px;
+          gap: 30px;
+        }
+
+        .left, .experience {
+          flex: none;
+          width: 100%;
+          max-width: 100%;
+        }
+
+        .experience {
+          max-height: none;
+        }
+
+        .company {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .company-details {
+          gap: 5px;
+        }
+
+        .tui-statusbar {
+          position: relative !important;
+        }
+
+        .main {
+          height: auto;
+          min-height: 100vh;
+        }
+      }
     </style>
   </head>
   <body>
@@ -140,7 +188,7 @@
           <div class="tui-window tui-shadow-2">
               <fieldset class="tui-fieldset tui-border-double">
                   <legend>About me</legend>
-                  <img src="assets/pp.png" width="200"/>
+                  <img src="assets/pp.png" style="max-width: 200px;"/>
                   <p>Name....: Trieu Le</span></p>
                   <p>City....: Calgary, Alberta</span></p>
                   <p>Position: Software Developer</span></p>
@@ -148,7 +196,7 @@
           </div>
 
           <div class="tui-window purple-255 tui-shadow-2">
-              <fieldset class="tui-fieldset tui-border-solid">
+              <fieldset class="tui-fieldset tui-border-double">
                   <legend>Connect</legend>
                   <button id="github_btn" style="margin-right: 10px" class="tui-button tui-button-img tui-modal-button white-255-text" data-modal="modal">
                     Github
