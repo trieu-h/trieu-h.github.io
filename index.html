@@ -186,11 +186,37 @@
 
     <div class="tui-overlap"></div>
 
-    <div class="tui-bg-green-white main">
+    <div id="main_background" class="main">
       <nav class="tui-nav absolute">
           <ul>
-              <li class="tui-dropdown">
+              <li class="tui-dropdown" id="download_cv">
                   <span class="red-168-text">R</span>esume
+                  <div class="tui-dropdown-content">
+                    <ul>
+                      <li><a href="assets/resume.pdf" target="_blank" data-background="tui-bg-blue-black">Download</a></li>
+                    </ul>
+                  </div>
+              </li>
+              <li class="tui-dropdown">
+                  <span class="red-168-text">B</span>ackground
+                  <div class="tui-dropdown-content">
+                    <ul id="background_picker">
+                      <li><a href="#!" data-background="tui-bg-blue-black">Blue - Black</a></li>
+                      <li><a href="#!" data-background="tui-bg-blue-white">Blue - White</a></li>
+                      <li><a href="#!" data-background="tui-bg-green-black">Green - Black</a></li>
+                      <li><a href="#!" data-background="tui-bg-green-white">Green - White</a></li>
+                      <li><a href="#!" data-background="tui-bg-cyan-black">Cyan - Black</a></li>
+                      <li><a href="#!" data-background="tui-bg-cyan-white">Cyan - White</a></li>
+                      <li><a href="#!" data-background="tui-bg-red-black">Red - Black</a></li>
+                      <li><a href="#!" data-background="tui-bg-red-white">Red - White</a></li>
+                      <li><a href="#!" data-background="tui-bg-purple-black">Purple - Black</a></li>
+                      <li><a href="#!" data-background="tui-bg-purple-white">Purple - White</a></li>
+                      <li><a href="#!" data-background="tui-bg-yellow-black">Yellow - Black</a></li>
+                      <li><a href="#!" data-background="tui-bg-yellow-white">Yellow - White</a></li>
+                      <li><a href="#!" data-background="tui-bg-orange-black">Orange - Black</a></li>
+                      <li><a href="#!" data-background="tui-bg-orange-white">Orange - White</a></li>
+                    </ul>
+                  </div>
               </li>
           </ul>
           <span class="tui-datetime full-date" data-format="M/d/y h:m:s a"></span>
@@ -328,6 +354,8 @@
 
     <script>
       let redirect_target = null;
+      let current_theme = 'tui-bg-green-white';
+      main_background.classList.add(current_theme);
 
       github_btn.addEventListener('click', (event) => {
         redirect_target = "https://github.com/trieu-h";
@@ -343,6 +371,12 @@
 
       cancel_btn.addEventListener('click', (event) => {
         redirect_target = null;
+      })
+
+      background_picker.addEventListener('click', (event) => {
+        main_background.classList.remove(current_theme);
+        current_theme = event.target.getAttribute('data-background');
+        main_background.classList.add(current_theme);
       })
     </script>
   </body>
