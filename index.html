@@ -39,6 +39,8 @@
         flex-direction: column;
         gap: 30px;
         flex: 5;
+        min-height: 0;
+        max-height: calc(100vh - 90px);
       }
 
       .experience-content {
@@ -122,6 +124,22 @@
         display: inline-block;
       }
 
+      .penger {
+        flex: 1;
+        min-height: 0;
+
+        fieldset {
+          display: flex;
+          justify-content: center;
+          height: 100%;
+        }
+
+        #penger {
+          width: 100%;
+          height: 100%:
+        }
+      }
+
       .company-details span {
         word-wrap: break-word;
         overflow-wrap: break-word;
@@ -136,7 +154,19 @@
         min-width: 150px;
       }
 
+      .section {
+        display: none;
+      }
+
+      .section.active {
+        display: contents;
+      }
+
       @media screen and (max-width: 768px) {
+        .left {
+          max-height: unset;
+        }
+
         .tui-nav {
           .tui-dropdown {
             display: none;
@@ -210,19 +240,15 @@
     <div id="main_background" class="main">
       <nav class="tui-sidenav">
           <ul>
+              <li class="nav-link" onclick="showSection('home')">
+                  <span class="red-168-text">H</span>ome
+              </li>
+              <li class="nav-link" onclick="showSection('projects')">
+                  <span class="red-168-text">P</span>roject
+              </li>
               <li>
                   <a href="assets/resume.pdf" target="_blank">
                       <span class="red-168-text">R</span>esume
-                  </a>
-              </li>
-              <li>
-                  <a href="#!">
-                      <span class="red-168-text">P</span>roject
-                  </a>
-              </li>
-              <li>
-                  <a href="#!">
-                      <span class="red-168-text">B</span>ackground
                   </a>
               </li>
           </ul>
@@ -232,6 +258,14 @@
           <ul>
               <li class="tui-sidenav-button red-168-text">≡</li>
 
+              <li class="tui-dropdown nav-link active" id="home_nav" onclick="showSection('home')">
+                  <span class="red-168-text">H</span>ome
+              </li>
+
+              <li class="tui-dropdown nav-link" id="projects_nav" onclick="showSection('projects')">
+                  <span class="red-168-text">P</span>roject
+              </li>
+
               <li class="tui-dropdown" id="download_cv">
                   <span class="red-168-text">R</span>esume
                   <div class="tui-dropdown-content">
@@ -239,10 +273,6 @@
                       <li><a href="assets/resume.pdf" target="_blank" data-background="tui-bg-blue-black">Download</a></li>
                     </ul>
                   </div>
-              </li>
-
-              <li class="tui-dropdown" id="download_cv">
-                  <span class="red-168-text">P</span>roject
               </li>
 
               <li class="tui-dropdown">
@@ -271,133 +301,147 @@
           <span class="tui-datetime short-date" data-format="h:m:s a"></span>
       </nav>
 
-      <div class="content">
-        <div class="left">
-          <div class="tui-window tui-shadow-2">
-              <fieldset class="tui-fieldset tui-border-double">
-                  <legend>About me</legend>
-                  <img src="assets/pp.png" style="max-width: 200px;"/>
-                  <p>Name....: Trieu Le</span></p>
-                  <p>City....: Calgary, Alberta</span></p>
+      <div id="home-section" class="section active">
+        <div class="content">
+          <div class="left">
+            <div class="tui-window tui-shadow-2">
+                <fieldset class="tui-fieldset tui-border-double">
+                    <legend>About me</legend>
+                    <img src="assets/pp.png" style="max-width: 200px;"/>
+                    <p>Name: Trieu Le</span></p>
+                    <p>City: Calgary, Alberta</span></p>
+                </fieldset>
+            </div>
+
+            <div class="tui-window purple-255 tui-shadow-2">
+                <fieldset class="tui-fieldset tui-border-double">
+                    <legend>Connect</legend>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                      <button id="github_btn" class="tui-button tui-button-img tui-modal-button white-255-text" data-modal="modal">
+                        Github
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24" fill="white" class="m-1 inline hover:cursor-pointer"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
+                      </button>
+                      <button id="linkedin_btn" class="tui-button tui-button-img tui-modal-button white-255-text" data-modal="modal">
+                        Linkedin
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24" fill="white" class="m-1 inline hover:cursor-pointer"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+                      </button>
+                      <button id="email_btn" class="tui-button tui-button-img tui-modal-button white-255-text">
+                        Email
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="white"/>
+                        </svg>
+                      </button>
+                      <button id="spotify_btn" class="tui-button tui-button-img tui-modal-button white-255-text" data-modal="modal">
+                        Spotify
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" height="24" width="24">
+                          <path fill="white" d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8Z"/>
+                          <path d="M406.6 231.1c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3zm-31 76.2c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm-26.9 65.6c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 26.2 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4z"/>
+                        </svg>
+                      </button>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="tui-window tui-shadow-2 cyan-168 penger">
+              <fieldset class="tui-fieldset tui-border">
+                <legend>penger.exe</legend>
+                <canvas id="penger"/>
               </fieldset>
+            </div>
           </div>
 
-          <div class="tui-window purple-255 tui-shadow-2">
+          <div class="tui-window white-168 experience tui-shadow-2">
               <fieldset class="tui-fieldset tui-border-double">
-                  <legend>Connect</legend>
-                  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                    <button id="github_btn" class="tui-button tui-button-img tui-modal-button white-255-text" data-modal="modal">
-                      Github
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24" fill="white" class="m-1 inline hover:cursor-pointer"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg>
-                    </button>
-                    <button id="linkedin_btn" class="tui-button tui-button-img tui-modal-button white-255-text" data-modal="modal">
-                      Linkedin
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height="24" width="24" fill="white" class="m-1 inline hover:cursor-pointer"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
-                    </button>
-                    <button id="email_btn" class="tui-button tui-button-img tui-modal-button white-255-text">
-                      Email
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="white"/>
-                      </svg>
-                    </button>
-                    <button id="spotify_btn" class="tui-button tui-button-img tui-modal-button white-255-text" data-modal="modal">
-                      Spotify
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" height="24" width="24">
-                        <path fill="white" d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8Z"/>
-                        <path d="M406.6 231.1c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3zm-31 76.2c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm-26.9 65.6c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 26.2 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4z"/>
-                      </svg>
-                    </button>
+                  <legend class="center">Experience</legend>
+                  <div class="experience-content">
+                    <div class="past-job black-168-text">
+                      <div class="company">
+                        <img width="50" src="assets/opswat.png">
+                        <div class="company-details">
+                          <span class="yellow-255-text">Senior Software Engineer</span>
+                          <span class="blue-168-text">OPSWAT (Nov 2022 - Jun 2025)</span>
+                        </div>
+                      </div>
+
+                      <p class="desc">
+                        MetaDefender Core
+                        Advanced malware prevention and detection platform designed for integration into secure IT infrastructure via cross-platform APIs.
+                      </p>
+
+                      <p> Key Contributions: <p>
+                      <ul>
+                        <li>Accessibility & Inclusion: Architected and implemented UI components to meet WCAG 2.1 standards, ensuring the security dashboard is accessible to all users.</li>
+                        <li>Quality Engineering: Spearheaded the transition to automated testing by introducing Playwright for End-to-End (E2E) testing, reducing manual QA cycles and increasing deployment confidence.</li>
+                        <li>Performance Optimization: Profiled web vitals to identify bottlenecks, resulting in minimized bundle sizes and significantly faster initial render times for the management console.</li>
+                      </ul>
+                    </div>
+
+                    <div class="tui-divider"></div>
+
+                    <div class="past-job black-168-text">
+                      <div class="company">
+                        <img width="50" src="assets/bosch.png">
+                        <div class="company-details">
+                          <span class="yellow-255-text">Senior Software Engineer</span>
+                          <span class="blue-168-text">Bosch (Nov 2021 - Aug 2022)</span>
+                        </div>
+                      </div>
+
+                      <p class="desc">
+                        Internal Budget Management Application
+                        Full-stack development of a centralized financial platform for internal resource allocation and real-time budget tracking.
+                      </p>
+                      <ul>
+                        <li>State Management & Scalability: Engineered complex reactive features using RxJS and NgRx to ensure predictable state transitions and high performance across large financial datasets.</li>
+                        <li>Core Library Architecture: Contributed reusable UI components and utility services to the company-wide core library, reducing duplicate code and ensuring design consistency across departments.</li>
+                        <li>Full-Stack Feature Delivery: Developed and maintained end-to-end features using Angular 12 and Java/Spring Boot, prioritizing strict data validation and adherence to enterprise coding standards.</li>
+                        <li>Quality Assurance & Mentorship: Maintained high code quality through rigorous peer code reviews and expanded the automated testing suite using Cypress to ensure 100% reliability for critical budget calculations.</li>
+                      </ul>
+                    </div>
+
+                    <div class="tui-divider"></div>
+
+                    <div class="past-job black-168-text">
+                      <div class="company">
+                        <img width="50" src="assets/nashtech.png">
+                        <div class="company-details">
+                          <span class="yellow-255-text">Software Engineer</span>
+                          <span class="blue-168-text">Nashtech (Jan 2021 - Aug 2021)</span>
+                        </div>
+                      </div>
+
+                      <p class="desc">
+                        Finantix ODC (Financial Solutions Division)
+                        Offshore development for a global FinTech leader, delivering bespoke digital banking and wealth management solutions for international financial institutions.
+                      </p>
+                      <ul>
+                        <li>Data-Driven Visualization: Architected complex financial dashboards and interactive reporting modules using Highcharts and Ag-Grid, enabling users to visualize and manage large-scale investment datasets.</li>
+                        <li>Modular Development: Partnered with Technical Leads to decompose high-level business requirements into scalable Angular 9 modules and reusable TypeScript functions, ensuring strict adherence to enterprise architecture.</li>
+                        <li>Global Collaboration: Orchestrated daily technical syncs and sprint reviews with Project Owners and QA teams across Italy and Singapore, facilitating seamless handovers and resolving cross-timezone integration blockers.</li>
+                        <li>Legacy System Modernization: Balanced the delivery of modern features with the maintenance of legacy codebases, utilizing Jasmine for unit testing to ensure stability and prevent regressions during system updates.</li>
+                        <li>UI/UX Optimization: Leveraged PrimeNG and Bootstrap 4 to build responsive, accessible financial interfaces that meet the professional standards of private banking clients.</li>
+                      </ul>
+                    </div>
+
+                    <div class="tui-divider"></div>
+
+                    <div class="past-job black-168-text">
+                      <div class="company">
+                        <img width="50" src="assets/starbap.png">
+                        <div class="company-details">
+                          <span class="yellow-255-text">Software Engineer</span>
+                          <span class="blue-168-text">Starbap Technology Vietnam (Aug 2020 - Feb 2021)</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
               </fieldset>
           </div>
         </div>
+      </div>
 
-        <div class="tui-window white-168 experience tui-shadow-2">
-            <fieldset class="tui-fieldset tui-border-double">
-                <legend class="center">Experience</legend>
-                <div class="experience-content">
-                  <div class="past-job black-168-text">
-                    <div class="company">
-                      <img width="50" src="assets/opswat.png">
-                      <div class="company-details">
-                        <span class="yellow-255-text">Senior Software Engineer</span>
-                        <span class="blue-168-text">OPSWAT (Nov 2022 - Jun 2025)</span>
-                      </div>
-                    </div>
-
-                    <p class="desc">
-                      MetaDefender Core
-                      Advanced malware prevention and detection platform designed for integration into secure IT infrastructure via cross-platform APIs.
-                    </p>
-
-                    <p> Key Contributions: <p>
-                    <ul>
-                      <li>Accessibility & Inclusion: Architected and implemented UI components to meet WCAG 2.1 standards, ensuring the security dashboard is accessible to all users.</li>
-                      <li>Quality Engineering: Spearheaded the transition to automated testing by introducing Playwright for End-to-End (E2E) testing, reducing manual QA cycles and increasing deployment confidence.</li>
-                      <li>Performance Optimization: Profiled web vitals to identify bottlenecks, resulting in minimized bundle sizes and significantly faster initial render times for the management console.</li>
-                    </ul>
-                  </div>
-
-                  <div class="tui-divider"></div>
-
-                  <div class="past-job black-168-text">
-                    <div class="company">
-                      <img width="50" src="assets/bosch.png">
-                      <div class="company-details">
-                        <span class="yellow-255-text">Senior Software Engineer</span>
-                        <span class="blue-168-text">Bosch Global Software Technologies Vietnam (Nov 2021 - Aug 2022)</span>
-                      </div>
-                    </div>
-
-                    <p class="desc">
-                      Internal Budget Management Application
-                      Full-stack development of a centralized financial platform for internal resource allocation and real-time budget tracking.
-                    </p>
-                    <ul>
-                      <li>State Management & Scalability: Engineered complex reactive features using RxJS and NgRx to ensure predictable state transitions and high performance across large financial datasets.</li>
-                      <li>Core Library Architecture: Contributed reusable UI components and utility services to the company-wide core library, reducing duplicate code and ensuring design consistency across departments.</li>
-                      <li>Full-Stack Feature Delivery: Developed and maintained end-to-end features using Angular 12 and Java/Spring Boot, prioritizing strict data validation and adherence to enterprise coding standards.</li>
-                      <li>Quality Assurance & Mentorship: Maintained high code quality through rigorous peer code reviews and expanded the automated testing suite using Cypress to ensure 100% reliability for critical budget calculations.</li>
-                    </ul>
-                  </div>
-
-                  <div class="tui-divider"></div>
-
-                  <div class="past-job black-168-text">
-                    <div class="company">
-                      <img width="50" src="assets/nashtech.png">
-                      <div class="company-details">
-                        <span class="yellow-255-text">Software Engineer</span>
-                        <span class="blue-168-text">Nashtech (Jan 2021 - Aug 2021)</span>
-                      </div>
-                    </div>
-
-                    <p class="desc">
-                      Finantix ODC (Financial Solutions Division)
-                      Offshore development for a global FinTech leader, delivering bespoke digital banking and wealth management solutions for international financial institutions.
-                    </p>
-                    <ul>
-                      <li>Data-Driven Visualization: Architected complex financial dashboards and interactive reporting modules using Highcharts and Ag-Grid, enabling users to visualize and manage large-scale investment datasets.</li>
-                      <li>Modular Development: Partnered with Technical Leads to decompose high-level business requirements into scalable Angular 9 modules and reusable TypeScript functions, ensuring strict adherence to enterprise architecture.</li>
-                      <li>Global Collaboration: Orchestrated daily technical syncs and sprint reviews with Project Owners and QA teams across Italy and Singapore, facilitating seamless handovers and resolving cross-timezone integration blockers.</li>
-                      <li>Legacy System Modernization: Balanced the delivery of modern features with the maintenance of legacy codebases, utilizing Jasmine for unit testing to ensure stability and prevent regressions during system updates.</li>
-                      <li>UI/UX Optimization: Leveraged PrimeNG and Bootstrap 4 to build responsive, accessible financial interfaces that meet the professional standards of private banking clients.</li>
-                    </ul>
-                  </div>
-
-                  <div class="tui-divider"></div>
-
-                  <div class="past-job black-168-text">
-                    <div class="company">
-                      <img width="50" src="assets/starbap.png">
-                      <div class="company-details">
-                        <span class="yellow-255-text">Software Engineer</span>
-                        <span class="blue-168-text">Starbap Technology Vietnam (Aug 2020 - Feb 2021)</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </fieldset>
+      <div id="projects-section" class="section">
+        <div class="content">
         </div>
       </div>
 
@@ -417,6 +461,30 @@
       let redirect_target = null;
       let current_theme = 'tui-bg-green-white';
       main_background.classList.add(current_theme);
+
+      function showSection(sectionName) {
+        document.querySelectorAll('.section').forEach(section => {
+          section.classList.remove('active');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+        });
+
+        const selectedSection = document.getElementById(sectionName + '-section');
+        if (selectedSection) {
+          selectedSection.classList.add('active');
+        }
+
+        const activeNav = document.getElementById(sectionName + '_nav');
+        if (activeNav) {
+          activeNav.classList.add('active');
+        }
+
+        document.querySelector('.tui-sidenav').classList.remove('tui-show');
+
+        window.scrollTo(0, 0);
+      }
 
       github_btn.addEventListener('click', (event) => {
         redirect_target = "https://github.com/trieu-h";
@@ -451,6 +519,42 @@
         current_theme = event.target.getAttribute('data-background');
         main_background.classList.add(current_theme);
       })
+
+      const penger_canvas = penger;
+      const ctx = penger_canvas.getContext('2d');
+      const penger_img = new Image();
+
+      penger_img.onload = function() {
+        const penger_size = 40;
+        let x = 10; let y = 10;
+        let dx = 1; let dy = 1;
+        let x_dir = 1; let y_dir = 1;
+
+        ctx.drawImage(penger_img, x, y, penger_size, penger_size);
+
+        const renderOneFrame = () => {
+          const w = penger_canvas.width;
+          const h = penger_canvas.height;
+          ctx.clearRect(0, 0, w, h);
+          if (x + penger_size >= w) {
+            x_dir = -1;
+          } else if (x <= 0) {
+            x_dir = 1;
+          }
+          if (y + penger_size >= h) {
+            y_dir = -1;
+          } else if (y <= 0) {
+            y_dir = 1;
+          }
+          x = x + (dx * x_dir);
+          y = y + (dy * y_dir);
+          ctx.drawImage(penger_img, x, y, penger_size, penger_size);
+          requestAnimationFrame(renderOneFrame);
+        }
+        requestAnimationFrame(renderOneFrame);
+      };
+
+      penger_img.src = "assets/jetger.gif";
     </script>
   </body>
 </>
