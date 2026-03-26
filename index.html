@@ -4,6 +4,7 @@
     <title>Trieu Le</title>
     <link rel="stylesheet" href="dist/tuicss.min.css"/>
     <script src="dist/tuicss.min.js"></script>
+    <script src="penger.js"></script>
     <style>
       body {
         height: 100vh;
@@ -134,7 +135,7 @@
           height: 100%;
         }
 
-        #penger {
+        #penger_canvas {
           width: 100%;
           height: 100%:
         }
@@ -160,6 +161,81 @@
 
       .section.active {
         display: contents;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        max-height: calc(100vh - 90px);
+        gap: 20px;
+        overflow-y: auto;
+        grid-template-areas:
+          "ex1 ex2 ex3"
+          "ex4 penger_game ex5"
+          "ex6 ex7 ex8";
+
+        #ex1 {
+          grid-area: ex1;
+        }
+
+        #ex2 {
+          grid-area: ex2;
+        }
+
+        #ex3 {
+          grid-area: ex3;
+        }
+
+        #ex4 {
+          grid-area: ex4;
+        }
+
+        #ex5 {
+          grid-area: ex5;
+        }
+
+        #ex6 {
+          grid-area: ex6;
+        }
+
+        #ex7 {
+          grid-area: ex7;
+        }
+
+        #ex8 {
+          grid-area: ex8;
+        }
+
+        #penger_game {
+          grid-area: penger_game;
+        }
+
+        > .tui-window {
+          display: flex;
+          flex-direction: column;
+          min-height: 0;
+        }
+
+        fieldset {
+          flex: 1;
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
+        }
+
+        img {
+          flex: 1;
+          min-height: 0;
+          object-fit: contain;
+          max-width: 100%;
+        }
+
+        canvas {
+          flex: none;
+          align-self: center;
+          max-width: 100%;
+        }
       }
 
       @media screen and (max-width: 768px) {
@@ -249,7 +325,7 @@
                   <span class="red-168-text">H</span>ome
               </li>
               <li class="nav-link" onclick="showSection('projects')">
-                  <span class="red-168-text">P</span>roject
+                  <span class="red-168-text">P</span>rojects
               </li>
               <li>
                   <a href="assets/resume.pdf" target="_blank">
@@ -268,7 +344,7 @@
               </li>
 
               <li class="tui-dropdown nav-link" id="projects_nav" onclick="showSection('projects')">
-                  <span class="red-168-text">P</span>roject
+                  <span class="red-168-text">P</span>rojects
               </li>
 
               <li class="tui-dropdown" id="download_cv">
@@ -350,7 +426,7 @@
             <div class="tui-window tui-shadow-2 cyan-168 penger">
               <fieldset class="tui-fieldset tui-border">
                 <legend>penger.exe</legend>
-                <canvas id="penger"/>
+                <canvas id="penger_canvas"/>
               </fieldset>
             </div>
           </div>
@@ -446,7 +522,50 @@
       </div>
 
       <div id="projects-section" class="section">
-        <div class="content">
+          <div class="content">
+            <div class="projects-grid">
+              <div class="tui-window tui-shadow-2 cyan-168" id="penger_game">
+                <fieldset class="tui-fieldset tui-border-solid">
+                  <legend>Penger3D.exe</legend>
+                  <canvas id="game"></canvas>
+                </fieldset>
+              </div>
+
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex1">
+                <fieldset class="tui-fieldset tui-border-solid">
+                  <legend>Bezier Curve Visualiser</legend>
+                  <img src="assets/bezier_demo.gif"/>
+                </fieldset>
+              </div>
+
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex2">
+                <fieldset class="tui-fieldset tui-border-solid">
+                  <legend>Mandelbrot Set Visualiser</legend>
+                  <img src="assets/mandelbrot.png">
+                </fieldset>
+              </div>
+
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex3">
+                <fieldset class="tui-fieldset tui-border-solid">
+                  <legend>Floyd–Steinberg dithering</legend>
+                  <img src="assets/dithering.png">
+                </fieldset>
+              </div>
+
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex4">
+                <fieldset class="tui-fieldset tui-border-solid">
+                  <legend>Minesweeper</legend>
+                  <img src="assets/minesweeper.gif">
+                </fieldset>
+              </div>
+
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex5">
+                <fieldset class="tui-fieldset tui-border-solid">
+                  <legend>Particle system in terminal</legend>
+                  <img src="assets/particles.gif">
+                </fieldset>
+              </div>
+          </div>
         </div>
       </div>
 
@@ -463,11 +582,21 @@
     </div>
 
     <script>
+      switch (window.location.hash.substring(1)) {
+        case "projects":
+          showSection("projects");
+          break;
+        default:
+          showSection("home");
+      }
+
       let redirect_target = null;
       let current_theme = 'tui-bg-green-white';
       main_background.classList.add(current_theme);
 
       function showSection(sectionName) {
+        window.location.hash = "#" + sectionName;
+
         document.querySelectorAll('.section').forEach(section => {
           section.classList.remove('active');
         });
@@ -525,7 +654,6 @@
         main_background.classList.add(current_theme);
       })
 
-      const penger_canvas = penger;
       const ctx = penger_canvas.getContext('2d');
       const penger_img = new Image();
 
@@ -570,6 +698,78 @@
 
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
+
+      // Projects page
+      const BACKGROUND = "#101010";
+      const FOREGROUND = "#50FF50";
+
+      game.width = 200;
+      game.height = 200;
+      const game_ctx = game.getContext("2d");
+
+      function clear() {
+        game_ctx.fillStyle = BACKGROUND;
+        game_ctx.fillRect(0, 0, game.width, game.height);
+      }
+
+      function line(p1, p2) {
+        game_ctx.lineWidth = 3;
+        game_ctx.strokeStyle = FOREGROUND;
+        game_ctx.beginPath();
+        game_ctx.moveTo(p1.x, p1.y);
+        game_ctx.lineTo(p2.x, p2.y);
+        game_ctx.stroke();
+      }
+
+      function screen(p) {
+        // -1..1 => 0..2 => 0..1 => 0..w
+        return {
+          x: (p.x + 1)/2*game.width,
+          y: (1 - (p.y + 1)/2)*game.height,
+        }
+      }
+
+      function project({x, y, z}) {
+        return {
+          x: x/z,
+          y: y/z,
+        }
+      }
+
+      const FPS = 60;
+
+      function translate_z({x, y, z}, dz) {
+        return {x, y, z: z + dz};
+      }
+
+      function rotate_xz({x, y, z}, angle) {
+        const c = Math.cos(angle);
+        const s = Math.sin(angle);
+        return {
+          x: x*c-z*s,
+          y,
+          z: x*s+z*c,
+        };
+      }
+
+      let dz = 1;
+      let angle = 0;
+
+      function frame() {
+        const dt = 1/FPS;
+        angle += Math.PI*dt;
+        clear()
+        for (const f of fs) {
+          for (let i = 0; i < f.length; ++i) {
+            const a = vs[f[i]];
+            const b = vs[f[(i+1)%f.length]];
+            line(screen(project(translate_z(rotate_xz(a, angle), dz))),
+              screen(project(translate_z(rotate_xz(b, angle), dz))))
+          }
+        }
+        setTimeout(frame, 1000/FPS);
+      }
+      setTimeout(frame, 1000/FPS);
     </script>
   </body>
 </>
