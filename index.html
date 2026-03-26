@@ -165,6 +165,7 @@
 
       .projects-grid {
         display: grid;
+        padding-right: 15px;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(3, 1fr);
         max-height: calc(100vh - 90px);
@@ -174,6 +175,10 @@
           "ex1 ex2 ex3"
           "ex4 penger_game ex5"
           "ex6 ex7 ex8";
+
+        fieldset:hover {
+          cursor: pointer;
+        }
 
         #ex1 {
           grid-area: ex1;
@@ -239,7 +244,7 @@
       }
 
       @media screen and (max-width: 768px) {
-        canvas#penger {
+        canvas#penger_canvas {
           min-height: 150px;
           max-height: 150px;
         }
@@ -524,23 +529,27 @@
       <div id="projects-section" class="section">
           <div class="content">
             <div class="projects-grid">
-              <div class="tui-window tui-shadow-2 cyan-168" id="penger_game">
-                <fieldset class="tui-fieldset tui-border-solid">
-                  <legend>Penger3D.exe</legend>
-                  <canvas id="game"></canvas>
-                </fieldset>
+              <!-- <div class="tui-window tui-shadow-2 cyan-168" id="penger_game"> -->
+              <!--   <fieldset class="tui-fieldset tui-border-solid"> -->
+              <!--     <legend>Penger3D.exe</legend> -->
+              <!--     <canvas id="game"></canvas> -->
+              <!--   </fieldset> -->
+              <!-- </div> -->
+
+              <div id="penger_game" style="display: flex; flex: 1; justify-content: center;">
+                <canvas id="game"></canvas>
               </div>
 
               <div class="tui-window tui-shadow-2 cyan-168" id="ex1">
                 <fieldset class="tui-fieldset tui-border-solid">
-                  <legend>Bezier Curve Visualiser</legend>
+                  <legend>Bezier curve visualiser</legend>
                   <img src="assets/bezier_demo.gif"/>
                 </fieldset>
               </div>
 
               <div class="tui-window tui-shadow-2 cyan-168" id="ex2">
                 <fieldset class="tui-fieldset tui-border-solid">
-                  <legend>Mandelbrot Set Visualiser</legend>
+                  <legend>Mandelbrot set visualiser</legend>
                   <img src="assets/mandelbrot.png">
                 </fieldset>
               </div>
@@ -554,12 +563,33 @@
 
               <div class="tui-window tui-shadow-2 cyan-168" id="ex4">
                 <fieldset class="tui-fieldset tui-border-solid">
-                  <legend>Minesweeper</legend>
+                  <legend>Minesweeper in terminal</legend>
                   <img src="assets/minesweeper.gif">
                 </fieldset>
               </div>
 
               <div class="tui-window tui-shadow-2 cyan-168" id="ex5">
+                <fieldset class="tui-fieldset tui-border-solid">
+                  <legend>Particle system in terminal</legend>
+                  <img src="assets/particles.gif">
+                </fieldset>
+              </div>
+
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex6">
+                <fieldset class="tui-fieldset tui-border-solid">
+                  <legend>Particle system in terminal</legend>
+                  <img src="assets/particles.gif">
+                </fieldset>
+              </div>
+
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex7">
+                <fieldset class="tui-fieldset tui-border-solid">
+                  <legend>Particle system in terminal</legend>
+                  <img src="assets/particles.gif">
+                </fieldset>
+              </div>
+
+              <div class="tui-window tui-shadow-2 cyan-168" id="ex8" style="transform: perspective(400px) scaleZ(1) translateZ(-100px);">
                 <fieldset class="tui-fieldset tui-border-solid">
                   <legend>Particle system in terminal</legend>
                   <img src="assets/particles.gif">
@@ -618,6 +648,13 @@
         document.querySelector('.tui-sidenav').classList.remove('tui-show');
 
         window.scrollTo(0, 0);
+
+        switch (sectionName) {
+          case "projects":
+            initProjectsPage();
+          case "home":
+            initHomePage();
+        }
       }
 
       github_btn.addEventListener('click', (event) => {
@@ -654,50 +691,52 @@
         main_background.classList.add(current_theme);
       })
 
-      const ctx = penger_canvas.getContext('2d');
-      const penger_img = new Image();
+      function initHomePage() {
+        const ctx = penger_canvas.getContext('2d');
+        const penger_img = new Image();
 
-      penger_img.onload = function() {
-        let x = 10; let y = 10;
-        let dx = 1; let dy = 1;
-        let x_dir = 1; let y_dir = 1;
+        penger_img.onload = function() {
+          let x = 10; let y = 10;
+          let dx = 1; let dy = 1;
+          let x_dir = 1; let y_dir = 1;
 
-        const renderOneFrame = () => {
-          let penger_size = 40;
-          const w = penger_canvas.width;
-          const h = penger_canvas.height;
-          ctx.clearRect(0, 0, w, h);
+          const renderOneFrame = () => {
+            let penger_size = 40;
+            const w = penger_canvas.width;
+            const h = penger_canvas.height;
+            ctx.clearRect(0, 0, w, h);
 
-          if (h < 40) penger_size = 15;
+            if (h < 40) penger_size = 15;
 
-          if (x + penger_size >= w) {
-            x_dir = -1;
-          } else if (x <= 0) {
-            x_dir = 1;
+            if (x + penger_size >= w) {
+              x_dir = -1;
+            } else if (x <= 0) {
+              x_dir = 1;
+            }
+            if (y + penger_size >= h) {
+              y_dir = -1;
+            } else if (y <= 0) {
+              y_dir = 1;
+            }
+            x = x + (dx * x_dir);
+            y = y + (dy * y_dir);
+            ctx.drawImage(penger_img, x, y, penger_size, penger_size);
+            requestAnimationFrame(renderOneFrame);
           }
-          if (y + penger_size >= h) {
-            y_dir = -1;
-          } else if (y <= 0) {
-            y_dir = 1;
-          }
-          x = x + (dx * x_dir);
-          y = y + (dy * y_dir);
-          ctx.drawImage(penger_img, x, y, penger_size, penger_size);
           requestAnimationFrame(renderOneFrame);
-        }
-        requestAnimationFrame(renderOneFrame);
-      };
+        };
 
-      penger_img.src = "assets/jetger.gif";
+        penger_img.src = "assets/jetger.gif";
 
-      const resizeCanvas = () => {
-        const rect = penger_canvas.getBoundingClientRect();
-        penger_canvas.width = rect.width;
-        penger_canvas.height = rect.height;
-      };
+        const resizeCanvas = () => {
+          const rect = penger_canvas.getBoundingClientRect();
+          penger_canvas.width = rect.width;
+          penger_canvas.height = rect.height;
+        };
 
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+      }
 
       // Projects page
       const BACKGROUND = "#101010";
@@ -769,7 +808,58 @@
         }
         setTimeout(frame, 1000/FPS);
       }
+
       setTimeout(frame, 1000/FPS);
+      function initProjectsPage() {
+
+        const animationMap = {
+          "ex1": {
+            initial: -80,
+            step: 5
+          },
+          "ex2": {
+            initial: -100,
+            step: 5
+          },
+          "ex3": {
+            initial: -120,
+            step: 5
+          },
+          "ex4": {
+            initial: -70,
+            step: 5
+          },
+          "ex5": {
+            initial: -140,
+            step: 5
+          },
+          "ex6": {
+            initial: -160,
+            step: 5
+          },
+          "ex7": {
+            initial: -60,
+            step: 5
+          },
+          "ex8": {
+            initial: -200,
+            step: 5
+          },
+        }
+
+        for (let [ex, anim] of Object.entries(animationMap)) {
+          let z = anim.initial;
+
+          const interval = setInterval(() => {
+            z += anim.step;
+            if (z === 0) {
+              clearInterval(interval);
+            }
+            const ex_elem = document.getElementById(ex);
+            ex_elem.style.transform = `perspective(400px) scaleZ(1) translateZ(${z}px)`;
+          }, 10)
+        }
+      }
     </script>
   </body>
 </>
