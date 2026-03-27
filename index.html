@@ -169,6 +169,7 @@
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(3, 1fr);
         max-height: calc(100dvh - 90px);
+        padding: 20px 0;
         gap: 20px;
         overflow-y: auto;
         grid-template-areas:
@@ -230,7 +231,7 @@
           flex-direction: column;
         }
 
-        img {
+        img:not(#penger_img) {
           flex: 1;
           min-height: 0;
           object-fit: contain;
@@ -554,15 +555,8 @@
       <div id="projects-section" class="section">
           <div class="content">
             <div class="projects-grid">
-              <!-- <div class="tui-window tui-shadow-2 cyan-168" id="penger_game"> -->
-              <!--   <fieldset class="tui-fieldset tui-border-solid"> -->
-              <!--     <legend>Penger3D.exe</legend> -->
-              <!--     <canvas id="game"></canvas> -->
-              <!--   </fieldset> -->
-              <!-- </div> -->
-
-              <div id="penger_game" style="display: flex; flex: 1; justify-content: center;">
-                <canvas id="game"></canvas>
+              <div id="penger_game" style="display: flex; flex: 1; justify-content: center; align-items: center;">
+                <img src="assets/sleepger.gif" width="80" height="80" id="penger_img">
               </div>
 
               <div class="tui-window tui-shadow-2 cyan-168" id="ex1">
@@ -764,79 +758,79 @@
       }
 
       // Projects page
-      const BACKGROUND = "#101010";
-      const FOREGROUND = "#50FF50";
+      <!-- const BACKGROUND = "#101010"; -->
+      <!-- const FOREGROUND = "#50FF50"; -->
+      <!---->
+      <!-- game.width = 200; -->
+      <!-- game.height = 200; -->
+      <!-- const game_ctx = game.getContext("2d"); -->
+      <!---->
+      <!-- function clear() { -->
+      <!--   game_ctx.fillStyle = BACKGROUND; -->
+      <!--   game_ctx.fillRect(0, 0, game.width, game.height); -->
+      <!-- } -->
+      <!---->
+      <!-- function line(p1, p2) { -->
+      <!--   game_ctx.lineWidth = 3; -->
+      <!--   game_ctx.strokeStyle = FOREGROUND; -->
+      <!--   game_ctx.beginPath(); -->
+      <!--   game_ctx.moveTo(p1.x, p1.y); -->
+      <!--   game_ctx.lineTo(p2.x, p2.y); -->
+      <!--   game_ctx.stroke(); -->
+      <!-- } -->
+      <!---->
+      <!-- function screen(p) { -->
+      <!--   // -1..1 => 0..2 => 0..1 => 0..w -->
+      <!--   return { -->
+      <!--     x: (p.x + 1)/2*game.width, -->
+      <!--     y: (1 - (p.y + 1)/2)*game.height, -->
+      <!--   } -->
+      <!-- } -->
+      <!---->
+      <!-- function project({x, y, z}) { -->
+      <!--   return { -->
+      <!--     x: x/z, -->
+      <!--     y: y/z, -->
+      <!--   } -->
+      <!-- } -->
+      <!---->
+      <!-- const FPS = 60; -->
+      <!---->
+      <!-- function translate_z({x, y, z}, dz) { -->
+      <!--   return {x, y, z: z + dz}; -->
+      <!-- } -->
+      <!---->
+      <!-- function rotate_xz({x, y, z}, angle) { -->
+      <!--   const c = Math.cos(angle); -->
+      <!--   const s = Math.sin(angle); -->
+      <!--   return { -->
+      <!--     x: x*c-z*s, -->
+      <!--     y, -->
+      <!--     z: x*s+z*c, -->
+      <!--   }; -->
+      <!-- } -->
+      <!---->
+      <!-- let dz = 1; -->
+      <!-- let angle = 0; -->
+      <!---->
+      <!-- function frame() { -->
+      <!--   const dt = 1/FPS; -->
+      <!--   angle += Math.PI*dt; -->
+      <!--   clear() -->
+      <!--   for (const f of fs) { -->
+      <!--     for (let i = 0; i < f.length; ++i) { -->
+      <!--       const a = vs[f[i]]; -->
+      <!--       const b = vs[f[(i+1)%f.length]]; -->
+      <!--       line(screen(project(translate_z(rotate_xz(a, angle), dz))), -->
+      <!--         screen(project(translate_z(rotate_xz(b, angle), dz)))) -->
+      <!--     } -->
+      <!--   } -->
+      <!--   setTimeout(frame, 1000/FPS); -->
+      <!-- } -->
+      <!---->
+      <!-- setTimeout(frame, 1000/FPS); -->
 
-      game.width = 200;
-      game.height = 200;
-      const game_ctx = game.getContext("2d");
-
-      function clear() {
-        game_ctx.fillStyle = BACKGROUND;
-        game_ctx.fillRect(0, 0, game.width, game.height);
-      }
-
-      function line(p1, p2) {
-        game_ctx.lineWidth = 3;
-        game_ctx.strokeStyle = FOREGROUND;
-        game_ctx.beginPath();
-        game_ctx.moveTo(p1.x, p1.y);
-        game_ctx.lineTo(p2.x, p2.y);
-        game_ctx.stroke();
-      }
-
-      function screen(p) {
-        // -1..1 => 0..2 => 0..1 => 0..w
-        return {
-          x: (p.x + 1)/2*game.width,
-          y: (1 - (p.y + 1)/2)*game.height,
-        }
-      }
-
-      function project({x, y, z}) {
-        return {
-          x: x/z,
-          y: y/z,
-        }
-      }
-
-      const FPS = 60;
-
-      function translate_z({x, y, z}, dz) {
-        return {x, y, z: z + dz};
-      }
-
-      function rotate_xz({x, y, z}, angle) {
-        const c = Math.cos(angle);
-        const s = Math.sin(angle);
-        return {
-          x: x*c-z*s,
-          y,
-          z: x*s+z*c,
-        };
-      }
-
-      let dz = 1;
-      let angle = 0;
-
-      function frame() {
-        const dt = 1/FPS;
-        angle += Math.PI*dt;
-        clear()
-        for (const f of fs) {
-          for (let i = 0; i < f.length; ++i) {
-            const a = vs[f[i]];
-            const b = vs[f[(i+1)%f.length]];
-            line(screen(project(translate_z(rotate_xz(a, angle), dz))),
-              screen(project(translate_z(rotate_xz(b, angle), dz))))
-          }
-        }
-        setTimeout(frame, 1000/FPS);
-      }
-
-      setTimeout(frame, 1000/FPS);
       function initProjectsPage() {
-
         const animationMap = {
           "ex1": {
             initial: -80,
@@ -885,6 +879,46 @@
             ex_elem.style.transform = `perspective(400px) scaleZ(1) translateZ(${z}px)`;
           }, 10)
         }
+
+        const ex1 = document.getElementById("ex1");
+        const ex3 = document.getElementById("ex3");
+        const penger_img = document.getElementById("penger_img");
+
+        document.addEventListener("mousemove", (e) => {
+          const { left: ex1_left, width: ex1_width, top: ex1_top } = ex1.getBoundingClientRect();
+          const { left: ex3_left, width: ex3_width } = ex3.getBoundingClientRect();
+          const { top:  ex6_top, height: ex6_height } = ex6.getBoundingClientRect();
+          const { width: penger_img_width, left: penger_img_left, top: penger_img_top } = penger_img.getBoundingClientRect();
+          const mouseLeft = e.clientX;
+          const mouseTop  = e.clientY;
+
+          if (mouseLeft > ex3_left + ex3_width || mouseLeft < ex1_left || mouseTop < ex1_top || mouseTop > ex6_top + ex6_height) {
+            penger_img.src = "assets/sleepger.gif";
+            penger_img.style.transform = "scaleX(1)";
+          } else {
+            const { width: penger_img_width, left: penger_img_left, top: penger_img_top, height: penger_img_height } = penger_img.getBoundingClientRect();
+            let angle = 0;
+            let scaleX = 1;
+            const closeness = 80;
+            const xDistToPenger = Math.abs(penger_img_left + penger_img_width/2  - mouseLeft);
+            const yDistToPenger = Math.abs(penger_img_top  + penger_img_height/2 - mouseTop);
+            const distToPengerSqr = xDistToPenger * xDistToPenger + yDistToPenger * yDistToPenger;
+
+            if (distToPengerSqr < closeness * closeness) {
+              if (penger_img.getAttribute("src") !== "assets/penger_giga.gif") {
+                penger_img.src = "assets/penger_giga.gif";
+              }
+            } else {
+              scaleX = mouseLeft > penger_img_left + penger_img.width ? -1 : 1;
+              const tan = yDistToPenger / xDistToPenger;
+              const sign = mouseTop < penger_img_top ? -1 : 1;
+              angle = Math.atan(tan) * (180 / Math.PI) * sign * (scaleX * -1);
+              penger_img.src = "assets/penger_h.png";
+            }
+
+            penger_img.style.transform = `rotate(${angle}deg) scaleX(${scaleX})`;
+          }
+        })
       }
     </script>
   </body>
