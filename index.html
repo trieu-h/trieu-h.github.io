@@ -28,19 +28,17 @@
         gap: 30px;
         max-width: 1200px;
         margin: auto;
-      }
-
-      #projects-section {
-        .content {
-          height: 100%;
-          align-items: center;
-        }
+        height: 100%;
+        max-height: 1000px;
       }
 
       .experience {
         flex: 11;
-        max-height: calc(100dvh - 90px);
-        overflow-y: auto;
+
+        fieldset {
+          height: 100%;
+          overflow: auto;
+        }
       }
 
       .tui-nav {
@@ -56,7 +54,6 @@
         gap: 30px;
         flex: 5;
         min-height: 0;
-        max-height: calc(100dvh - 90px);
       }
 
       .experience-content {
@@ -176,7 +173,8 @@
       }
 
       .section.active {
-        display: contents;
+        display: flex;
+        height: 100%;
       }
 
       .projects-grid {
@@ -421,7 +419,7 @@
                       <li><a href="#!" data-background="tui-bg-yellow-white">Yellow - White</a></li>
                       <li><a href="#!" data-background="tui-bg-orange-black">Orange - Black</a></li>
                       <li><a href="#!" data-background="tui-bg-orange-white">Orange - White</a></li>
-                      <li><a href="#!" data-background="penger-wallpaper">All the pengers</a></li>
+                      <li><a href="#!" data-background="penger-wallpaper">Pengers</a></li>
                     </ul>
                   </div>
               </li>
@@ -625,7 +623,7 @@
 
               <div class="tui-window tui-shadow-2 cyan-168" id="ex7">
                 <fieldset class="tui-fieldset tui-border-solid">
-                  <legend>Bouncing ball physic</legend>
+                  <legend>Bouncing ball physics</legend>
                   <img src="assets/bouncing-balls.gif">
                 </fieldset>
               </div>
