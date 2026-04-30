@@ -201,6 +201,13 @@ body {
     }
 
     &.focused {
+      &::before {
+        content: url("./assets/sitger.png");
+        position: absolute;
+        top: -16px;
+        left: 10px;
+      }
+
       legend {
         text-align: center;
       }
